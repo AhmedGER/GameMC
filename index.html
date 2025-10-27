@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eaglercraft - العب Minecraft على المتصفح</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #333;
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+
+        .play-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 60px;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .play-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .play-button:active {
+            transform: translateY(-2px);
+        }
+
+        .info {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+
+        .info-item {
+            display: inline-block;
+            margin: 10px 20px;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .info-item strong {
+            color: #667eea;
+            display: block;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .minecraft-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        .note {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .play-button {
+                padding: 15px 40px;
+                font-size: 1.2em;
+            }
+            
+            .container {
+                padding: 40px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="minecraft-icon">🎮</div>
+        <h1>Eaglercraft</h1>
+        <p class="subtitle">العب Minecraft مباشرة على المتصفح!</p>
+        
+        <button class="play-button" onclick="playGame()">
+            🚀 ابدأ اللعب الآن
+        </button>
+
+        <div class="info">
+            <div class="info-item">
+                <strong>✓</strong>
+                مجاني 100%
+            </div>
+            <div class="info-item">
+                <strong>✓</strong>
+                بدون تحميل
+            </div>
+            <div class="info-item">
+                <strong>✓</strong>
+                يعمل على أي جهاز
+            </div>
+        </div>
+
+        <div class="note">
+            📝 ملاحظة: ستحتاج لرفع ملفات Eaglercraft على GitHub أولاً حتى يعمل الزر
+        </div>
+    </div>
+
+    <script>
+        function playGame() {
+            // هنا ستضع رابط صفحة Eaglercraft عندما ترفعها
+            // مثال: window.location.href = '/eaglercraft/index.html';
+            
+            alert('يرجى رفع ملفات Eaglercraft أولاً!\n\nبعد رفع الملفات، غيّر السطر في الكود إلى:\nwindow.location.href = "/eaglercraft/index.html";');
+        }
+    </script>
+</body>
+</html>
