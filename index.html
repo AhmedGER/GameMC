@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eaglercraft - العب Minecraft على المتصفح</title>
+    <title>Eaglercraft - اختر الإصدار</title>
     <style>
         * {
             margin: 0;
@@ -24,10 +24,10 @@
         .container {
             text-align: center;
             background: rgba(255, 255, 255, 0.95);
-            padding: 60px 40px;
+            padding: 50px 40px;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
+            max-width: 800px;
             width: 100%;
             animation: fadeIn 0.8s ease;
         }
@@ -43,41 +43,101 @@
             }
         }
 
+        .minecraft-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
         h1 {
             color: #333;
-            font-size: 3em;
+            font-size: 2.5em;
             margin-bottom: 15px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .subtitle {
             color: #666;
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin-bottom: 40px;
+        }
+
+        .versions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .version-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .version-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        .version-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+        }
+
+        .version-title {
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .version-desc {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.85em;
+            margin: 5px;
+            position: relative;
         }
 
         .play-button {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 60px;
-            font-size: 1.5em;
+            background: white;
+            color: #667eea;
+            padding: 12px 30px;
+            font-size: 1.1em;
             font-weight: bold;
             text-decoration: none;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            border-radius: 30px;
+            margin-top: 15px;
             transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
+            position: relative;
         }
 
         .play-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
-        }
-
-        .play-button:active {
-            transform: translateY(-2px);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .info {
@@ -86,9 +146,14 @@
             border-top: 2px solid #eee;
         }
 
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
         .info-item {
-            display: inline-block;
-            margin: 10px 20px;
             color: #555;
             font-size: 0.95em;
         }
@@ -100,18 +165,29 @@
             margin-bottom: 5px;
         }
 
-        .minecraft-icon {
-            font-size: 5em;
-            margin-bottom: 20px;
+        .server-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-right: 4px solid #667eea;
         }
 
-        .note {
-            margin-top: 30px;
-            padding: 15px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            color: #666;
-            font-size: 0.9em;
+        .server-info h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .server-address {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            font-weight: bold;
+            margin: 10px 0;
+            border: 2px dashed #667eea;
         }
 
         @media (max-width: 600px) {
@@ -119,9 +195,8 @@
                 font-size: 2em;
             }
             
-            .play-button {
-                padding: 15px 40px;
-                font-size: 1.2em;
+            .versions-grid {
+                grid-template-columns: 1fr;
             }
             
             .container {
@@ -134,38 +209,105 @@
     <div class="container">
         <div class="minecraft-icon">🎮</div>
         <h1>Eaglercraft</h1>
-        <p class="subtitle">العب Minecraft مباشرة على المتصفح!</p>
+        <p class="subtitle">اختر إصدار Minecraft المفضل لديك!</p>
         
-        <button class="play-button" onclick="playGame()">
-            🚀 ابدأ اللعب الآن
-        </button>
+        <div class="versions-grid">
+            <!-- Eaglercraft 1.8.8 -->
+            <div class="version-card" onclick="playVersion('1.8')">
+                <div class="version-title">1.8.8</div>
+                <div class="version-desc">
+                    الإصدار الأكثر استقراراً وشعبية
+                    <br>مثالي للعب PvP و Survival
+                </div>
+                <div class="version-badge">✨ الأكثر استقراراً</div>
+                <div class="version-badge">⚡ سريع</div>
+                <a href="#" class="play-button" onclick="event.stopPropagation(); playVersion('1.8')">
+                    العب الآن
+                </a>
+            </div>
 
-        <div class="info">
-            <div class="info-item">
-                <strong>✓</strong>
-                مجاني 100%
-            </div>
-            <div class="info-item">
-                <strong>✓</strong>
-                بدون تحميل
-            </div>
-            <div class="info-item">
-                <strong>✓</strong>
-                يعمل على أي جهاز
+            <!-- Eaglercraft 1.12.2 -->
+            <div class="version-card" onclick="playVersion('1.12')">
+                <div class="version-title">1.12.2</div>
+                <div class="version-desc">
+                    إصدار حديث مع مميزات أكثر
+                    <br>يدعم المزيد من الـ Mods
+                </div>
+                <div class="version-badge">🆕 حديث</div>
+                <div class="version-badge">🔧 Mods</div>
+                <a href="#" class="play-button" onclick="event.stopPropagation(); playVersion('1.12')">
+                    العب الآن
+                </a>
             </div>
         </div>
 
-        <div class="note">
-            📝 ملاحظة: ستحتاج لرفع ملفات Eaglercraft على GitHub أولاً حتى يعمل الزر
+        <div class="server-info">
+            <h3>🌐 اتصل بسيرفرنا:</h3>
+            <p style="color: #666; margin-bottom: 10px;">عنوان السيرفر (للنسخ):</p>
+            <div class="server-address" id="serverAddress">
+                wss://229.ip.ply.gg:8081
+            </div>
+            <p style="color: #888; font-size: 0.9em; margin-top: 10px;">
+                💡 انسخ العنوان → Multiplayer → Add Server → الصق العنوان
+            </p>
+        </div>
+
+        <div class="info">
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>✓</strong>
+                    مجاني 100%
+                </div>
+                <div class="info-item">
+                    <strong>✓</strong>
+                    بدون تحميل
+                </div>
+                <div class="info-item">
+                    <strong>✓</strong>
+                    يعمل على أي جهاز
+                </div>
+                <div class="info-item">
+                    <strong>✓</strong>
+                    إصدارات متعددة
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        function playGame() {
-            // هنا ستضع رابط صفحة Eaglercraft عندما ترفعها
-            window.location.href = '/GameMC/eaglercraft/index.html';
-            
+        function playVersion(version) {
+            if (version === '1.8') {
+                // رابط Eaglercraft 1.8.8
+                // يمكنك وضع ملفات Eaglercraft 1.8 في مجلد /eaglercraft-1.8/
+                alert('🎮 Eaglercraft 1.8.8\n\nلتشغيل هذا الإصدار:\n\n1. حمّل Eaglercraft 1.8.8 من:\nhttps://eaglercraft.com/mc/1.8.8\n\n2. ضع الملفات في مجلد: /eaglercraft-1.8/\n\n3. غيّر الكود ليفتح: window.location.href = "/eaglercraft-1.8/index.html"');
+                
+                // عندما ترفع الملفات، استبدل السطر أعلاه بـ:
+                // window.location.href = '/eaglercraft-1.8/index.html';
+            } else if (version === '1.12') {
+                // رابط Eaglercraft 1.12.2
+                alert('🎮 Eaglercraft 1.12.2\n\nلتشغيل هذا الإصدار:\n\n1. حمّل Eaglercraft 1.12.2 من:\nhttps://eaglercraft.com/mc/1.12.2-wasm/\n\n2. ضع الملفات في مجلد: /eaglercraft-1.12/\n\n3. غيّر الكود ليفتح: window.location.href = "/eaglercraft-1.12/index.html"');
+                
+                // عندما ترفع الملفات، استبدل السطر أعلاه بـ:
+                // window.location.href = '/eaglercraft-1.12/index.html';
+            }
         }
+
+        // نسخ عنوان السيرفر عند الضغط عليه
+        document.getElementById('serverAddress').addEventListener('click', function() {
+            const address = this.textContent.trim();
+            navigator.clipboard.writeText(address).then(function() {
+                const original = document.getElementById('serverAddress').innerHTML;
+                document.getElementById('serverAddress').innerHTML = '✅ تم النسخ!';
+                document.getElementById('serverAddress').style.background = '#d4edda';
+                document.getElementById('serverAddress').style.color = '#155724';
+                
+                setTimeout(function() {
+                    document.getElementById('serverAddress').innerHTML = original;
+                    document.getElementById('serverAddress').style.background = 'white';
+                    document.getElementById('serverAddress').style.color = '#333';
+                }, 2000);
+            });
+        });
     </script>
 </body>
-</html>
+    </html>
